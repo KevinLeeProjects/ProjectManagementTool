@@ -1,0 +1,38 @@
+﻿@page
+@model Project_Management_Tool.Pages.Users.IndexModel
+@{
+}
+
+<br>
+<h2>List of Users</h2>
+<a class='btn btn-primary btn-sm' href='/Users/Create'>New User</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Admin Perms</th>
+            <th>Created At</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var item in Model.listUsers)
+        {
+            <tr>
+                <td>@item.id</td>
+                <td>@item.name</td>
+                <td>@item.email</td>
+                <td>@item.phone</td>
+                <td>@item.admin_perms</td>
+                <td>@item.created_at</td>
+                <td>
+                    <a class="btn btn-primary btm-sm" href="/Users/Edit?id=@item.id">Edit</a>
+                    <a class="btn btn-danger btn-sm" href="/Users/Delete?id=@item.id">Delete</a>
+                </td>
+             </tr>
+        }
+    </tbody>
+</table>
