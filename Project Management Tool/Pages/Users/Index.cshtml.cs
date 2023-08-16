@@ -29,8 +29,9 @@ namespace Project_Management_Tool.Pages.Users
                                 userInfo.name = reader.GetString(1);
                                 userInfo.email = reader.GetString(2);
                                 userInfo.phone = reader.GetString(3);
-                                userInfo.admin_perms = reader.GetString(4);
-                                userInfo.created_at = reader.GetDateTime(5).ToString();
+                                userInfo.task = reader.GetString(4);
+                                userInfo.admin_perms = reader.GetString(5);
+                                userInfo.created_at = reader.GetDateTime(6).ToString();
 
                                 listUsers.Add(userInfo);
                                 
@@ -52,6 +53,7 @@ namespace Project_Management_Tool.Pages.Users
         public String name;
         public String email;
         public String phone;
+        public String task;
         public String admin_perms;
         public String created_at;
     }

@@ -11,6 +11,13 @@ a {
   color: #0077cc;
 }
 
+.cta-buttons {
+    display: flex;
+    align-items: center; 
+    gap: 1rem;
+    margin-right: 20px; 
+}
+
 .btn-primary {
   color: #fff;
   background-color: #1b6ec2;
