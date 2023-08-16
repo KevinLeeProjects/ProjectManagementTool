@@ -1,4 +1,16 @@
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using Project_Management_Tool.Data;
+using Project_Management_Tool.Areas.Identity.Data;
+
 var builder = WebApplication.CreateBuilder(args);
+var connectionString = builder.Configuration.GetConnectionString("Project_Management_ToolDBContextConnection") ?? throw new InvalidOperationException("Connection string 'Project_Management_ToolDBContextConnection' not found.");
+
+builder.Services.AddDbContext<Project_Management_ToolDBContext>(options =>
+    options.UseSqlServer(connectionString));
+
+builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
+    .AddEntityFrameworkStores<Project_Management_ToolDBContext>();
 
 // Add services to the container.
 builder.Services.AddRazorPages();
@@ -13,6 +25,7 @@ if (!app.Environment.IsDevelopment())
 app.UseStaticFiles();
 
 app.UseRouting();
+app.UseAuthentication();;
 
 app.UseAuthorization();
 
