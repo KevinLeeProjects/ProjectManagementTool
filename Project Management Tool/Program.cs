@@ -9,7 +9,7 @@ var connectionString = builder.Configuration.GetConnectionString("Project_Manage
 builder.Services.AddDbContext<Project_Management_ToolDBContext>(options =>
     options.UseSqlServer(connectionString));
 
-builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
+builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = false)
     .AddEntityFrameworkStores<Project_Management_ToolDBContext>();
 
 // Add services to the container.
@@ -26,6 +26,8 @@ app.UseStaticFiles();
 
 app.UseRouting();
 app.UseAuthentication();;
+
+
 
 app.UseAuthorization();
 
