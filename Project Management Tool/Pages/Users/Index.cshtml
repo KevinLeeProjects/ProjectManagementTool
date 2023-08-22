@@ -3,12 +3,41 @@
 @{
 }
 
+<script>
+    function updateStatus(checkbox) {
+        var userId = checkbox.getAttribute('data-id');
+        var isChecked = checkbox.checked ? 1 : 0; // Convert boolean to 0 or 1
+
+        // Send AJAX request to update status
+        fetch('/Users/UpdateStatus', {
+            console.log("HERE");
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify({
+                userId: userId,
+                isChecked: isChecked
+            })
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data); // Handle the response if needed
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    }
+</script>
+
 <br>
 <h2>List of Users</h2>
 <a class='btn btn-primary btn-sm' href='/Users/Create'>New User</a>
 <table class="table">
     <thead>
         <tr>
+            <th>Done</th>
             <th>ID</th>
             <th>Name</th>
             <th>Email</th>
@@ -23,6 +52,7 @@
         @foreach(var item in Model.listUsers)
         {
             <tr>
+                <td><input type="checkbox" enabled @(item.done ? "checked" : "") data-id="@item.id" onclick="updateStatus(this)" /></td>
                 <td>@item.id</td>
                 <td>@item.name</td>
                 <td>@item.email</td>
@@ -38,3 +68,4 @@
         }
     </tbody>
 </table>
+

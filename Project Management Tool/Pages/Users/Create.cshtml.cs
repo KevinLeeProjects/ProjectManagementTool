@@ -16,6 +16,7 @@ namespace Project_Management_Tool.Pages.Users
 
         public void OnPost() 
         {
+            userInfo.done = false;
             userInfo.name = Request.Form["name"];
             userInfo.email = Request.Form["email"];
             userInfo.phone = Request.Form["phone"];
@@ -35,11 +36,12 @@ namespace Project_Management_Tool.Pages.Users
                 {
                     connection.Open();
                     String sql = "INSERT into users " +
-                        "(name, email, phone, task, admin_perms) VALUES " +
-                        "(@name, @email, @phone, @task, @admin_perms);";
+                        "(done, name, email, phone, task, admin_perms) VALUES " +
+                        "(@done, @name, @email, @phone, @task, @admin_perms);";
 
                     using (SqlCommand command = new SqlCommand(sql, connection))
                     {
+                        command.Parameters.AddWithValue("@done", false);
                         command.Parameters.AddWithValue("@name", userInfo.name);
                         command.Parameters.AddWithValue("@email", userInfo.email);
                         command.Parameters.AddWithValue("@phone", userInfo.phone);
@@ -56,6 +58,7 @@ namespace Project_Management_Tool.Pages.Users
                 return;
             }
 
+            userInfo.done = false;
             userInfo.name = "";
             userInfo.email = "";
             userInfo.phone = "";
